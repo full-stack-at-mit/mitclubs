@@ -1,6 +1,20 @@
+"use client";
 import Image from "next/image";
+import { Session } from "./api/auth/session/route";
+import { useState, useEffect } from "react";
+import { getAppClientSession } from "./authClient";
 
 export default function Home() {
+  const [session, setSession] = useState<Session | undefined>(undefined);
+  useEffect(() => {
+    getAppClientSession().then(setSession);
+  }, []);
+
+  const onSignInClicked = () => {
+    if (session === undefined) return;
+    if (session === null) window.location.href = "/api/auth/sign-in";
+    else window.location.href = "/api/auth/sign-out";
+  };
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -22,6 +36,21 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
+        <button
+          className="text-md hidden flex-none rounded-lg md:block"
+          onClick={onSignInClicked}
+        >
+          {session === null ? (
+            "Sign in"
+          ) : session === undefined ? (
+            "Loading..."
+          ) : (
+            <div className="flex flex-col items-end">
+              <span className="text-sm">{session?.user?.name}</span>
+              <span className="text-xs">{session?.user?.email}</span>
+            </div>
+          )}
+        </button>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
