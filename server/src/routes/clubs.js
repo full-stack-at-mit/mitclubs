@@ -6,6 +6,6 @@ const { getClubs } = require("../controllers/clubs");
 
 const router = Router();
 
-router.get("/get-clubs", getClubs);
+
 
 module.exports = router;
