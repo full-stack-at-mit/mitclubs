@@ -10,7 +10,7 @@ const { PORT, CLIENT_URL } = require("./constants");
 
 // import routes
 const authRoutes = require("./routes/auth");
-const clubRoutes = require("./routes/clubs");
+const clubsRoutes = require("./routes/clubs");
 
 // initialize middlewares
 app.use(express.json());
@@ -20,7 +20,7 @@ app.use(cors({ origin: CLIENT_URL, credentials: true }));
 
 // initialize routes
 app.use("/api", authRoutes);
-app.use("/api", clubRoutes);
+app.use("/api", clubsRoutes);
 
 // start the app
 const appStart = () => {

@@ -1,11 +1,16 @@
-// here, put all routes related to clubs
+// here, put all routes related to authentication
 
 // imports
 const { Router } = require("express");
-const { getClubs } = require("../controllers/clubs");
+// const { getClubs, getID, addClub, updateClub, deleteClub } = require("../controllers/clubs");
+const {getClubs, getID } = require("../controllers/clubs");
 
 const router = Router();
 
-
+router.get("/clubs", getClubs);
+router.get("/clubs/:id", getID);
+// router.post("/club", addClub);
+// router.put("/club", updateClub);
+// router.delete("/club",  deleteClub);
 
 module.exports = router;

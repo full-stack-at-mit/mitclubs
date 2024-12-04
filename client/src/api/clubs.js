@@ -3,5 +3,11 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 
 export async function getClubs() {
-  return await axios.get("http://localhost:8000/api/get-clubs");
+  return await axios.get(
+    "http://localhost:8000/api/clubs",
+  );
+}
+
+export async function getID(id) {
+  return await axios.post(`http://localhost:8000/api/clubs/${id}`);
 }
