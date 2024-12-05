@@ -9,5 +9,5 @@ export async function getClubs() {
 }
 
 export async function getID(id) {
-  return await axios.post(`http://localhost:8000/api/clubs/${id}`);
+  return await axios.get(`http://localhost:8000/api/clubs/${id}`);
 }

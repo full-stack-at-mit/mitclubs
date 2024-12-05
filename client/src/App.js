@@ -5,15 +5,16 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
-// push test
+
 import Home from "./pages/Home.js";
 import Dashboard from "./pages/Dashboard.js";
 import Register from "./pages/Register.js";
 import Login from "./pages/Login.js";
+import ClubDetails from "./pages/ClubDetails.js"; // Import the ClubDetails component
 import { useSelector } from "react-redux";
 
 import React from "react";
-import './index.css'
+import './index.css';
 
 function App() {
   const PrivateRoutes = () => {
@@ -31,16 +32,22 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Home route */}
         <Route path="/" element={<Home />} />
 
+        {/* Private routes */}
         <Route element={<PrivateRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
 
+        {/* Restricted routes */}
         <Route element={<RestrictedRoutes />}>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Route>
+
+        {/* Club details route */}
+        <Route path="/clubs/:id" element={<ClubDetails />} /> {/* New Route */}
       </Routes>
     </BrowserRouter>
   );
