@@ -7,6 +7,7 @@ import {
 } from "react-icons/fa";
 import { saveClub, unsaveClub } from "../api/clubs.js";
 import defaultImage from "../assets/default.png";
+import { useNavigate } from "react-router-dom";
 
 function ClubCard({
   id,
@@ -20,8 +21,10 @@ function ClubCard({
   isSavedInitially = false,
 }) {
   const [isSaved, setIsSaved] = useState(isSavedInitially);
+  const navigate = useNavigate();
 
-  const toggleSave = async () => {
+  const toggleSave = async (e) => {
+    e.stopPropagation();
     try {
       if (!isSaved) {
         await saveClub(id);
@@ -34,8 +37,15 @@ function ClubCard({
     }
   };
 
+  const handleCardClick = () => {
+    navigate(`/clubs/${id}`);
+  };
+
   return (
-    <div className="w-full h-full flex flex-col bg-white shadow-md rounded-lg p-6 border border-gray-200">
+    <div
+      onClick={handleCardClick}
+      className="w-full h-full flex flex-col bg-white shadow-md rounded-lg p-6 border border-gray-200 cursor-pointer hover:shadow-lg transition-shadow"
+    >
       <div className="flex justify-between items-start mb-4">
         {/* Club Name and Logo */}
         <div className="flex-1 pr-2">
