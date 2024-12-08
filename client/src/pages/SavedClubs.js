@@ -24,7 +24,12 @@ function SavedClubs() {
   }, []);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (error)
+    return (
+      <Layout>
+        <p className="text-red-500 text-bold text-3xl p-10">{error}</p>
+      </Layout>
+    )
 
   return (
     <Layout>

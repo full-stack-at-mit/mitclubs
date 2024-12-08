@@ -59,7 +59,7 @@ const Dashboard = () => {
             />
 
             {/* User Info */}
-            <div className="mt-4 sm:mt-0 sm:ml-6 text-center sm:text-left">
+            {/* <div className="mt-4 sm:mt-0 sm:ml-6 text-center sm:text-left">
               <h2 className="text-2xl font-bold text-gray-800">{protectedData.name}</h2>
               <p className="text-gray-600 mt-2">{protectedData.bio}</p>
               <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:space-x-6">
@@ -74,33 +74,7 @@ const Dashboard = () => {
                   </span>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Additional Profile Details */}
-          <div className="mt-8">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">Profile Details</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Example Detail 1 */}
-              <div className="flex items-center">
-                <FaUser className="text-gray-500 mr-3" />
-                <div>
-                  <h4 className="text-gray-700 font-medium">Username</h4>
-                  <p className="text-gray-600">{protectedData.username || 'N/A'}</p>
-                </div>
-              </div>
-
-              {/* Example Detail 2 */}
-              <div className="flex items-center">
-                <FaEnvelope className="text-gray-500 mr-3" />
-                <div>
-                  <h4 className="text-gray-700 font-medium">Email</h4>
-                  <p className="text-gray-600">{protectedData.email}</p>
-                </div>
-              </div>
-
-              {/* Add more details as needed */}
-            </div>
+            </div> */}
           </div>
 
           {/* Logout Button */}
