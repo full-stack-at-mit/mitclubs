@@ -21,7 +21,7 @@ function ClubGrid() {
             {clubs.map((club) => (
                 <ClubCard
                     key={club.club_id}
-                    id={club.club_id} // Pass the club ID
+                    id={club.club_id}
                     name={club.name}
                     type={club.type}
                     isAccepting={club.is_accepting}

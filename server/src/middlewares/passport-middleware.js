@@ -31,6 +31,7 @@ passport.use(
         throw new Error("401 not authorized");
       }
 
+      // console.log("Authenticated User:", rows[0]);
       let user = { id: rows[0].user_id, email: rows[0].email };
 
       return await done(null, user);
