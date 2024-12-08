@@ -20,3 +20,13 @@ create table clubs(
     mission text,
     picture_url varchar(255)
 );
+
+-- tracks which clubs each user has saved
+CREATE TABLE user_saved_clubs (
+    user_id INT NOT NULL,
+    club_id INT NOT NULL,
+    saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, club_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE CASCADE
+);
