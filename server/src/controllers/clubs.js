@@ -53,3 +53,56 @@ exports.saveClub = async (req, res) => {
         res.status(500).json({ error: "Error saving club" });
     }
 };
+
+exports.getSavedClubs = async (req, res) => {
+    const user_id = req.user?.id;
+
+    try {
+        const result = await db.query(
+            `
+            SELECT c.*
+            FROM clubs c
+            JOIN user_saved_clubs usc ON c.club_id = usc.club_id
+            WHERE usc.user_id = $1;
+            `,
+            [user_id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: "No saved clubs found for this user" });
+        }
+
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Error fetching saved clubs" });
+    }
+};
+
+exports.unsaveClub = async (req, res) => {
+    const user_id = req.user.id;
+    const { id: club_id } = req.params;
+
+    try {
+        // check if the club is saved by the user
+        const existing = await db.query(
+            "SELECT * FROM user_saved_clubs WHERE user_id = $1 AND club_id = $2",
+            [user_id, club_id]
+        );
+
+        if (existing.rows.length === 0) {
+            return res.status(404).json({ error: "Club not found in saved list" });
+        }
+
+        // remove the saved club
+        await db.query(
+            "DELETE FROM user_saved_clubs WHERE user_id = $1 AND club_id = $2",
+            [user_id, club_id]
+        );
+
+        res.status(200).json({ message: "Club unsaved successfully" });
+    } catch (error) {
+        console.error("Error unsaving club:", error);
+        res.status(500).json({ error: "Error unsaving the club" });
+    }
+};

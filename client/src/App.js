@@ -10,7 +10,8 @@ import Home from "./pages/Home.js";
 import Dashboard from "./pages/Dashboard.js";
 import Register from "./pages/Register.js";
 import Login from "./pages/Login.js";
-import ClubDetails from "./pages/ClubDetails.js"; // Import the ClubDetails component
+import ClubDetails from "./pages/ClubDetails.js";
+import SavedClubs from "./pages/SavedClubs.js";
 import { useSelector } from "react-redux";
 
 import React from "react";
@@ -38,6 +39,7 @@ function App() {
         {/* Private routes */}
         <Route element={<PrivateRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/saved-clubs" element={<SavedClubs />} />
         </Route>
 
         {/* Restricted routes */}
