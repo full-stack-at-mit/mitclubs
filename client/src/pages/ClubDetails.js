@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
+import { useParams, useNavigate } from "react-router-dom";
 import { getID } from "../api/clubs";
 
 const ClubDetails = () => {
     const { id } = useParams();
-    const navigate = useNavigate(); // Initialize navigate
+    const navigate = useNavigate();
     const [club, setClub] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -24,44 +24,76 @@ const ClubDetails = () => {
     }, [id]);
 
     if (loading) {
-        return <p className="text-center text-xl mt-10">Loading...</p>;
+        return <p className="text-center text-xl mt-10 text-cyan-600">Loading...</p>;
     }
 
     if (!club) {
-        return <p className="text-center text-xl mt-10">Club not found.</p>;
+        return <p className="text-center text-xl mt-10 text-red-500">Club not found.</p>;
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-8">
-            <div className="w-full max-w-5xl">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-white p-8">
+            <div className="w-full max-w-4xl">
                 {/* Back Button */}
                 <button
-                    className="mb-4 px-4 py-2 bg-blue-500 text-white text-lg font-semibold rounded-lg shadow hover:bg-blue-600"
-                    onClick={() => navigate("/")} // Navigate to the homepage
+                    className="mb-6 px-6 py-3 bg-white text-black text-md font-medium rounded-full border hover:bg-cyan-600 transition-all"
+                    onClick={() => navigate("/")}
                 >
                     ← Back to All Clubs
                 </button>
-                <div className="bg-white shadow-xl rounded-lg p-12">
-                    <h1 className="text-5xl font-bold text-center text-gray-800 mb-6">{club.name}</h1>
-                    <p className="text-xl text-gray-700 mb-4"><strong>Type:</strong> {club.type}</p>
-                    <p className="text-xl text-gray-700 mb-4"><strong>Active:</strong> {club.is_active ? "Yes" : "No"}</p>
-                    <p className="text-xl text-gray-700 mb-4"><strong>Recruitment Cycle:</strong> {club.recruiting_cycle}</p>
-                    <p className="text-xl text-gray-700 mb-4"><strong>Membership Process:</strong> {club.membership_process}</p>
-                    <p className="text-xl text-gray-700 mb-4">
-                        <strong>Email:</strong>{" "}
-                        <a href={`mailto:${club.email}`} className="text-blue-500 hover:underline">
-                            {club.email}
-                        </a>
-                    </p>
-                    <p className="text-xl text-gray-700 mb-4">
-                        <strong>Website:</strong>{" "}
-                        <a href={club.website} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-                            {club.website}
-                        </a>
-                    </p>
-                    <p className="text-xl text-gray-700">
-                        <strong>Mission:</strong> {club.mission}
-                    </p>
+                <div className="bg-white shadow-2xl rounded-lg overflow-hidden">
+                    {/* Club Header */}
+                    <div className="bg-cyan-100 text-black text-center py-8 px-6">
+                        <h1 className="text-4xl font-extrabold">{club.name}</h1>
+                        <p className="text-lg mt-2">{club.mission}</p>
+                    </div>
+                    {/* Club Details */}
+                    <div className="p-8 space-y-6">
+                        <div>
+                            <p className="text-lg text-gray-700">
+                                <strong>Type:</strong> {club.type}
+                            </p>
+                        </div>
+                        <div>
+                            <p className="text-lg text-gray-700">
+                                <strong>Active:</strong> {club.is_active ? "Yes" : "No"}
+                            </p>
+                        </div>
+                        <div>
+                            <p className="text-lg text-gray-700">
+                                <strong>Recruitment Cycle:</strong> {club.recruiting_cycle}
+                            </p>
+                        </div>
+                        <div>
+                            <p className="text-lg text-gray-700">
+                                <strong>Membership Process:</strong> {club.membership_process}
+                            </p>
+                        </div>
+                        <div>
+                            <p className="text-lg text-gray-700">
+                                <strong>Email:</strong>{" "}
+                                <a
+                                    href={`mailto:${club.email}`}
+                                    className="text-cyan-600 hover:underline"
+                                >
+                                    {club.email}
+                                </a>
+                            </p>
+                        </div>
+                        <div>
+                            <p className="text-lg text-gray-700">
+                                <strong>Website:</strong>{" "}
+                                <a
+                                    href={club.website}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-cyan-600 hover:underline"
+                                >
+                                    {club.website}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

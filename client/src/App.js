@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 
 import React from "react";
 import './index.css';
+import ClubsPage from "./pages/ClubsPage.js";
 
 function App() {
   const PrivateRoutes = () => {
@@ -34,7 +35,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Home route */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<ClubsPage />} />
 
         {/* Private routes */}
         <Route element={<PrivateRoutes />}>
